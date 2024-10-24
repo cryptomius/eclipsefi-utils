@@ -1,13 +1,29 @@
 import streamlit as st
 import requests
 import json
+import time
+
+def make_api_request(url, max_retries=3):
+    """Helper function to make API requests with retries and better error handling"""
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()  # Raise an error for bad status codes
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries - 1:  # Last attempt
+                raise Exception(f"API request failed after {max_retries} attempts: {str(e)}")
+            time.sleep(1)  # Wait before retrying
+        except json.JSONDecodeError as e:
+            if attempt == max_retries - 1:  # Last attempt
+                raise Exception(f"Failed to decode JSON response: {str(e)}\nResponse content: {response.text[:200]}")
+            time.sleep(1)  # Wait before retrying
 
 def query_staked_eclip():
     url = "https://rest.cosmos.directory/neutron/cosmwasm/wasm/v1/contract/neutron19q93n64nyet24ynvw04qjqmejffkmyxakdvl08sf3n3yeyr92lrs2makhx/smart/eyJxdWVyeV9zdGF0ZSI6e319"
     
     try:
-        response = requests.get(url)
-        data = response.json()
+        data = make_api_request(url)
         
         # Extract the stake state amount
         stake_amount = int(data['data']['stake_state']['total_bond_amount'])
@@ -21,14 +37,14 @@ def query_staked_eclip():
         return total_staked, None
         
     except Exception as e:
+        st.error(f"Debug info - URL: {url}")
         return None, f"Error querying staked ECLIP: {str(e)}"
 
 def query_cosmic_essence():
     url = "https://rest.cosmos.directory/neutron/cosmwasm/wasm/v1/contract/neutron19q93n64nyet24ynvw04qjqmejffkmyxakdvl08sf3n3yeyr92lrs2makhx/smart/eyJxdWVyeV90b3RhbF9lc3NlbmNlIjp7fX0="
     
     try:
-        response = requests.get(url)
-        data = response.json()
+        data = make_api_request(url)
         
         # Extract the essence value and convert to integer
         total_essence = int(int(data['data']['essence']) // 1_000_000)
@@ -36,6 +52,7 @@ def query_cosmic_essence():
         return total_essence, None
         
     except Exception as e:
+        st.error(f"Debug info - URL: {url}")
         return None, f"Error querying Cosmic Essence: {str(e)}"
 
 def display_metric(label, value, color="#00FF00"):
