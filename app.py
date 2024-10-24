@@ -2,8 +2,7 @@ import streamlit as st
 import requests
 import json
 
-def query_cosmic_essence():
-    # Neutron blockchain query endpoint
+def query_staked_eclip():
     url = "https://rest.cosmos.directory/neutron/cosmwasm/wasm/v1/contract/neutron19q93n64nyet24ynvw04qjqmejffkmyxakdvl08sf3n3yeyr92lrs2makhx/smart/eyJxdWVyeV9zdGF0ZSI6e319"
     
     try:
@@ -16,22 +15,48 @@ def query_cosmic_essence():
         # Extract lock state amounts
         lock_amounts = [int(state['total_bond_amount']) for state in data['data']['lock_states']]
         
-        # Calculate total (dividing by 1,000,000 as specified)
-        total_essence = (stake_amount + sum(lock_amounts)) / 1_000_000
+        # Calculate total and convert to integer
+        total_staked = int((stake_amount + sum(lock_amounts)) // 1_000_000)
+        
+        return total_staked, None
+        
+    except Exception as e:
+        return None, f"Error querying staked ECLIP: {str(e)}"
+
+def query_cosmic_essence():
+    url = "https://rest.cosmos.directory/neutron/cosmwasm/wasm/v1/contract/neutron19q93n64nyet24ynvw04qjqmejffkmyxakdvl08sf3n3yeyr92lrs2makhx/smart/eyJxdWVyeV90b3RhbF9lc3NlbmNlIjp7fX0="
+    
+    try:
+        response = requests.get(url)
+        data = response.json()
+        
+        # Extract the essence value and convert to integer
+        total_essence = int(int(data['data']['essence']) // 1_000_000)
         
         return total_essence, None
         
     except Exception as e:
-        return None, str(e)
+        return None, f"Error querying Cosmic Essence: {str(e)}"
+
+def display_metric(label, value, color="#00FF00"):
+    st.markdown(f"### {label}")
+    st.markdown(
+        f"""
+        <div style='background-color: #1E1E1E; padding: 20px; border-radius: 10px; text-align: center;'>
+            <h1 style='color: {color}; font-size: 48px;'>{int(value):,d}</h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 def main():
     st.set_page_config(
-        page_title="Cosmic Essence Tracker",
+        page_title="ECLIP & Cosmic Essence Tracker",
         page_icon="🌌",
         layout="centered"
     )
     
-    st.title("🌌 Cosmic Essence Tracker")
+    st.title("🌌 ECLIP & Cosmic Essence Tracker")
     
     # Add a refresh button
     if st.button("Refresh Data"):
@@ -40,26 +65,31 @@ def main():
     # Query the data (with caching)
     @st.cache_data(ttl=300)  # Cache for 5 minutes
     def get_cached_data():
-        return query_cosmic_essence()
+        staked_eclip, eclip_error = query_staked_eclip()
+        cosmic_essence, essence_error = query_cosmic_essence()
+        return staked_eclip, cosmic_essence, eclip_error, essence_error
     
-    total_essence, error = get_cached_data()
+    staked_eclip, cosmic_essence, eclip_error, essence_error = get_cached_data()
     
-    if error:
-        st.error(f"Error fetching data: {error}")
-    else:
-        # Display the total essence with nice formatting
-        st.markdown("### Total Cosmic Essence")
-        st.markdown(
-            f"""
-            <div style='background-color: #1E1E1E; padding: 20px; border-radius: 10px; text-align: center;'>
-                <h1 style='color: #00FF00; font-size: 48px;'>{total_essence:,.2f}</h1>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        # Add timestamp
-        st.caption("Data refreshes every 5 minutes. Click refresh button for immediate update.")
+    # Display errors if any
+    if eclip_error:
+        st.error(eclip_error)
+    if essence_error:
+        st.error(essence_error)
+    
+    # Create two columns for metrics
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if staked_eclip is not None:
+            display_metric("Total Staked ECLIP", staked_eclip, "#00FF00")
+            
+    with col2:
+        if cosmic_essence is not None:
+            display_metric("Total Cosmic Essence", cosmic_essence, "#FF00FF")
+    
+    # Add timestamp
+    st.caption("Data refreshes every 5 minutes. Click refresh button for immediate update.")
 
 if __name__ == "__main__":
     main()
