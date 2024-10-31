@@ -57,6 +57,14 @@ with col2:
     
     [Launch Dashboard](https://ido-dashboards.streamlit.app/)
     """)
+    
+    # Sixth card
+    st.markdown("""
+    ### 🍰 Equinox Positions Dashboard
+    See what participants have committed to Single Sided vs LP Vaults and the lock periods they have distributed to.
+    
+    [Launch Dashboard](https://equinox-participation.streamlit.app/)
+    """)
 
 # # Footer
 # st.markdown("---")
