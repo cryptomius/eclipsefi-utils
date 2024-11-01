@@ -28,8 +28,9 @@ with col1:
     st.markdown("""
     ### 💰 Eclipse Fi IDO Participation
     Explore participation statistics for Eclipse Fi's IDOs.
+    *(Private dashboard)*
     
-    [Launch Dashboard](https://eclipsefi-ido-participation.streamlit.app/)
+    [Launch Dashboard](https://ido-dashboards.streamlit.app/Participation)
     """)
     
 
@@ -38,8 +39,9 @@ with col2:
     st.markdown("""
     ### 📊 Eclipse Fi IDO Tiers
     Analyze the composition of Cosmic Essence holders for each IDO snapshot.
+    *(Private dashboard)*
     
-    [Launch Dashboard](https://cosmic-essence-flow.streamlit.app/)
+    [Launch Dashboard](https://ido-dashboards.streamlit.app/Cosmic_Essence_Flow)
     """)
     
     # card
@@ -48,7 +50,7 @@ with col2:
     View cohort retention, top participants & country attribution.
     *(Private dashboard)*
     
-    [Launch Dashboard](https://ido-dashboards.streamlit.app/)
+    [Launch Dashboard](https://ido-dashboards.streamlit.app/Analytics)
     """)
     
 
