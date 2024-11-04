@@ -16,7 +16,7 @@ st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    # First card
+    # card
     st.markdown("""
     ### 📈 Staked ECLIP & Cosmic Essence Tracker
     Track all staked ECLIP and Cosmic Essence live from the blockchain.
@@ -36,12 +36,21 @@ with col1:
 with col2:
     
     
-    # Sixth card
+    # card
     st.markdown("""
     ### 🍰 Equinox Positions Dashboard
     See what participants have committed to Single Sided vs LP Vaults and the lock periods they have distributed to.
     
     [Launch Dashboard](https://equinox-participation.streamlit.app/)
+    """)
+
+    # card
+    st.markdown("""
+    ### 📊 Equinox Participation
+    Analyze the composition of Equinox participants by vault type and lock period.
+    *(Private dashboard)*
+    
+    [Launch Dashboard](https://ido-dashboards.streamlit.app/Equinox)
     """)
 
 # # Footer
