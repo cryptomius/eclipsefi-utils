@@ -38,10 +38,10 @@ with col2:
     
     # card
     st.markdown("""
-    ### 🍰 Equinox Positions Dashboard
-    See what participants have committed to Single Sided vs LP Vaults and the lock periods they have distributed to.
+    ### 🍰 Equinox Position Dashboard
+    See what a participant has committed to Single Sided vs LP Vaults and the lock periods they have allocated to.
     
-    [Launch Dashboard](https://equinox-participation.streamlit.app/)
+    [Launch Dashboard](https://equinox-positions.streamlit.app/)
     """)
 
     # card
