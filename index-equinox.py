@@ -25,12 +25,20 @@ with col1:
     """)
     
     
-    #  card
+    # card
     st.markdown("""
     ### 🔒 Equinox Lockdrop Statistics
     View the total amount of xASTRO committed to the lockdrop and its distribution.
     
     [Launch Dashboard](https://lockdrop-stats.streamlit.app/)
+    """)
+
+    # card
+    st.markdown("""
+    ### 📝 Equinox voting behaviour
+    View the voting behaviour of Equinox participants per Astroport Epoch.
+    
+    [Voting Behaviour](https://equinox-votes.streamlit.app/)
     """)
 
 with col2:
