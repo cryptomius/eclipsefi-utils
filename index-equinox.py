@@ -35,8 +35,8 @@ with col1:
 
     # card
     st.markdown("""
-    ### 📝 Equinox voting behaviour
-    View the voting behaviour of Equinox participants per Astroport Epoch.
+    ### 📝 Equinox LP pool voting behaviour
+    View the aggregated pool voting behaviour of Equinox participants per Astroport Epoch.
     
     [Voting Behaviour](https://equinox-votes.streamlit.app/)
     """)
@@ -54,11 +54,19 @@ with col2:
 
     # card
     st.markdown("""
-    ### 📊 Equinox Participation
-    Analyze the composition of Equinox participants by vault type and lock period.
+    ### 📊 Equinox Lockdrop Participation
+    Analyze the composition of Equinox Lockdropparticipants by vault type and lock period.
     *(Private dashboard)*
     
-    [Launch Dashboard](https://ido-dashboards.streamlit.app/Equinox)
+    [Launch Dashboard](https://ido-dashboards.streamlit.app/Equinox_Lockdrop)
+    """)
+
+    #card
+    st.markdown("""
+    ### 📊 Equinox Voting Behaviour Detail
+    Analyze the per-wallet voting behaviour of Equinox participants per Astroport Epoch.
+    
+    [Launch Dashboard](https://equinox-votes-wallets.streamlit.app/)
     """)
 
 # # Footer
