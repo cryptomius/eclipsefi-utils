@@ -18,7 +18,7 @@ col1, col2 = st.columns(2)
 with col1:
     # card
     st.markdown("""
-    ### 🔐 Staked ECLIP & Cosmic Essence Tracker
+    ### 🔐 Staked ECLIP & Cosmic Essence
     Track all staked ECLIP and Cosmic Essence live from the blockchain.
     
     [Launch Dashboard](https://cosmic-essence.streamlit.app/)
@@ -27,7 +27,7 @@ with col1:
     
     # card
     st.markdown("""
-    ### 🔒 Equinox Lockdrop Statistics
+    ### 🔒 Equinox Lockdrop Summary
     View the total amount of xASTRO committed to the lockdrop and its distribution.
     
     [Launch Dashboard](https://lockdrop-stats.streamlit.app/)
@@ -35,7 +35,7 @@ with col1:
 
     # card
     st.markdown("""
-    ### 🔍 Equinox Lockdrop Participation
+    ### 🔍 Equinox Lockdrop Detail
     Analyze the composition of Equinox Lockdrop participants by vault type and lock period.
     *(Private dashboard)*
     
@@ -49,7 +49,7 @@ with col2:
     
     # card
     st.markdown("""
-    ### 🕵️ Equinox Position Dashboard
+    ### 🕵️ Equinox Positions Viewer
     See what a participant has committed to Single Sided vs LP Vaults and the lock periods they have allocated to.
     
     [Launch Dashboard](https://equinox-positions.streamlit.app/)
@@ -57,7 +57,7 @@ with col2:
 
     # card
     st.markdown("""
-    ### 📊 Equinox LP pool voting behaviour
+    ### 📊 Equinox Voting Behaviour
     View the aggregated pool voting behaviour of Equinox participants per Astroport Epoch.
     
     [Voting Behaviour](https://equinox-votes.streamlit.app/)
